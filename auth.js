@@ -12,15 +12,21 @@ window.CobaltAuth = (() => {
       .toLowerCase();
   }
 
-  // Read the signed-in user's role from Supabase.
+  // Read or create the signed-in user's Cobalt membership.
+  // IMPORTANT: Storage RLS reads public.cobalt_members, so returning
+  // "student" only in JavaScript is not enough. This RPC makes sure the
+  // actual signed-in account has a real Cobalt membership row.
   async function getAccountRole() {
-    const { data, error } = await supabaseClient.rpc("cobalt_role");
+    const { data, error } = await supabaseClient.rpc("cobalt_ensure_member");
 
     if (error) {
-      console.error("Could not load account role:", error.message);
+      console.error(
+        "Could not load/create Cobalt membership:",
+        error.message,
+      );
 
       throw new Error(
-        "Could not load your account permissions. Please try again.",
+        "Could not load your Cobalt account permissions. Please try again.",
       );
     }
 
