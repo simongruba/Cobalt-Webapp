@@ -861,7 +861,7 @@ function confirmDelete(action) {
 function renderHero() {
   $("#class-front").innerHTML = media(state.hero[0], "Our Cobalt class photo");
   $("#hero-tools").innerHTML = admin()
-    ? mediaTools("hero:0", state.hero[0])
+    ? mediaTools("hero:0", state.hero[0], false)
     : "";
 }
 

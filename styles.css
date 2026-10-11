@@ -5348,3 +5348,39 @@ main > section {
     letter-spacing: 1.8px !important;
   }
 }
+
+
+/* Cobalt home photo — natural-size responsive display (no cropping).
+   The uploaded photo determines its container height at every screen width.
+   Unlike student thumbnails, the class portrait must show every classmate. */
+#class-photo.class-portrait {
+  width: 100%;
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+  overflow: hidden;
+}
+#class-photo #class-front {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: auto !important;
+  min-height: 0 !important;
+}
+#class-photo #class-front > img.media-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto !important;
+  max-height: none !important;
+  aspect-ratio: auto !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  /* Old saved zoom/crop settings must not hide classmates. */
+  transform: none !important;
+}
+/* Keep the graphic placeholder a usable size when no class photo exists. */
+#class-photo #class-front > .placeholder {
+  height: auto !important;
+  min-height: clamp(240px, 39svh, 380px);
+}
